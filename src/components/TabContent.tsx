@@ -56,27 +56,49 @@ export interface TabContentProps {
   sections: IRLSection[];
 }
 
-export const TabContent: React.FC<TabContentProps> = ({ code, sections }) => (
-  <TabWrapper>
-    <TabInner>
-      <Title>Related Links</Title>
-      <div>
-        {sections.map((section) => (
-          <Section key={section.title}>
-            <h3>{section.title}</h3>
-            <List>
-              {section.links.map((link) => (
-                <ListItem key={link.url}>
-                  <Link href={link.url} target="_blank">
-                    {link.text}
-                  </Link>
-                  <div>{link.description}</div>
-                </ListItem>
+export const TabContent: React.FC<TabContentProps> = ({ code, sections }) => {
+  return (
+    <TabWrapper>
+      <TabInner>
+        {!sections?.length ? (
+          <>
+            <Title style={{ fontWeight: "bold" }}>No links to show</Title>
+            <div>
+              You can add related links by adding the parameters to your
+              stories.{" "}
+              <div>
+                <Link
+                  target="_blank"
+                  href="https://github.com/AhsanAyaz/storybook-related-links#usage"
+                >
+                  Read the usage here
+                </Link>
+              </div>
+            </div>
+          </>
+        ) : (
+          <>
+            <Title>Related Links</Title>
+            <div>
+              {sections.map((section) => (
+                <Section key={section.title}>
+                  <h3>{section.title}</h3>
+                  <List>
+                    {section.links.map((link) => (
+                      <ListItem key={link.url}>
+                        <Link href={link.url} target="_blank">
+                          {link.text}
+                        </Link>
+                        <div>{link.description}</div>
+                      </ListItem>
+                    ))}
+                  </List>
+                </Section>
               ))}
-            </List>
-          </Section>
-        ))}
-      </div>
-    </TabInner>
-  </TabWrapper>
-);
+            </div>
+          </>
+        )}
+      </TabInner>
+    </TabWrapper>
+  );
+};

@@ -68,7 +68,8 @@ Small.parameters = {
           {
             text: "Angular Material",
             url: "https://material.angular.io",
-            description: "Imported from Angular Material",
+            description:
+              "This component is highly inspired from Angular Material. Which is an Angular port of the Material design by Google",
           },
         ],
       },

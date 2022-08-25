@@ -1,5 +1,30 @@
-# Storybook Addon Storybook Related Links
-Add links to your stories within sections
+# Storybook Addon Related Links
+Add related links to your stories. Useful for adding external links to the stories to highlight resources to study, inspirations, sources etc.
+
+
+## Usage
+You can add related links by adding the parameters to your stories as follows:
+```javascript
+MyStory.parameters = {
+  relatedLinks: {
+    sections: [
+      {
+        title: "Links to study",
+        links: [
+          {
+            text: "Angular Material",
+            url: "https://material.angular.io",
+            description: "This component is highly inspired from Angular Material. Which is an Angular port of the Material design by Google",
+          },
+        ],
+      },
+    ],
+  },
+}
+```
+
+## Demo
+![Demo](./assets//demo.png)
 
 ### Development scripts
 
@@ -13,8 +38,6 @@ Don't want to use TypeScript? We offer a handy eject command: `yarn eject-ts`
 This will convert all code to JS. It is a destructive process, so we recommended running this before you start writing any code.
 
 ## What's included?
-
-![Demo](https://user-images.githubusercontent.com/42671/107857205-e7044380-6dfa-11eb-8718-ad02e3ba1a3f.gif)
 
 The addon code lives in `src`. It demonstrates all core addon related concepts. The three [UI paradigms](https://storybook.js.org/docs/react/addons/addon-types#ui-based-addons)
 
@@ -90,3 +113,14 @@ That will:
 - Bump the version
 - Push a release to GitHub and npm
 - Push a changelog to GitHub
+
+## Connect with me
+
+[![Twitch](https://img.shields.io/badge/Twitch-9146FF?style=for-the-badge&logo=twitch&logoColor=white)](https://twitch.tv/codewithahsan)
+[![GitHub Profile](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://www.github.com/ahsanayaz)
+[![LinkedIn Profile](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/ahsanayaz)
+[![Twitter Profile](https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/codewith_ahsan)
+[![Instagram Profile](https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://instagram.com/codewithahsan)
+[![Facebook Profile](https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white)](https://facebook.com/codewithahsan)
+[![TikTok Profile](https://img.shields.io/badge/TikTok-000000?style=for-the-badge&logo=tiktok&logoColor=white)](https://www.tiktok.com/@codewithahsan)
+[![CodeWithAhsan Discord](https://img.shields.io/discord/814191682282717194.svg?label=CodeWithAhsan&logo=Discord&colorB=7289da&style=for-the-badge)](https://discord.gg/rEBSSh926k)
