@@ -5,11 +5,32 @@ export default {
   title: "Example/Button",
   component: Button,
   parameters: {
-    myAddonParameter: `
-<MyComponent boolProp scalarProp={1} complexProp={{ foo: 1, bar: '2' }}>
-  <SomeOtherComponent funcProp={(a) => a.id} />
-</MyComponent>
-`,
+    relatedLinks: {
+      sections: [
+        {
+          title: "Sources",
+          links: [
+            {
+              text: "Angular Material",
+              url: "https://material.angular.io",
+              description: "Imported from Angular Material",
+            },
+            {
+              text: "Angular Material",
+              url: "https://material.angular.io",
+            },
+            {
+              text: "Angular Material",
+              url: "https://material.angular.io",
+            },
+            {
+              text: "Angular Material",
+              url: "https://material.angular.io",
+            },
+          ],
+        },
+      ],
+    },
   },
 };
 
@@ -36,4 +57,21 @@ export const Small = Template.bind({});
 Small.args = {
   size: "small",
   label: "Button",
+};
+
+Small.parameters = {
+  relatedLinks: {
+    sections: [
+      {
+        title: "Links to study",
+        links: [
+          {
+            text: "Angular Material",
+            url: "https://material.angular.io",
+            description: "Imported from Angular Material",
+          },
+        ],
+      },
+    ],
+  },
 };

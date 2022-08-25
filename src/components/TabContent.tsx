@@ -1,6 +1,7 @@
 import React from "react";
 import { styled } from "@storybook/theming";
 import { Title, Source, Link } from "@storybook/components";
+import { accent1, gray5 } from "../cssVariables";
 
 const TabWrapper = styled.div(({ theme }) => ({
   background: theme.background.content,
@@ -15,33 +16,67 @@ const TabInner = styled.div({
   marginRight: "auto",
 });
 
-interface TabContentProps {
-  code: string;
+const List = styled.ul`
+  list-style: none;
+  padding: 0px 20px;
+  background-color: #fff;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border-top: 3px solid ${accent1};
+  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.16);
+`;
+
+const ListItem = styled.li`
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0px;
+  border-top: 1px solid ${gray5};
+  :first-of-type {
+    border-top: none;
+  }
+`;
+
+const Section = styled.div`
+  margin-top: 30px;
+`;
+
+interface IRLink {
+  text: string;
+  url: string;
+  description?: string;
 }
 
-export const TabContent: React.FC<TabContentProps> = ({ code }) => (
+interface IRLSection {
+  title?: string;
+  links: IRLink[];
+}
+
+export interface TabContentProps {
+  code: string;
+  sections: IRLSection[];
+}
+
+export const TabContent: React.FC<TabContentProps> = ({ code, sections }) => (
   <TabWrapper>
     <TabInner>
-      <Title>My Addon</Title>
-      <p>
-        Your addon can create a custom tab in Storybook. For example, the
-        official{" "}
-        <Link href="https://storybook.js.org/docs/react/writing-docs/introduction">
-          @storybook/addon-docs
-        </Link>{" "}
-        uses this pattern.
-      </p>
-      <p>
-        You have full control over what content is being rendered here. You can
-        use components from{" "}
-        <Link href="https://github.com/storybookjs/storybook/tree/master/lib/components">
-          @storybook/components
-        </Link>{" "}
-        to match the look and feel of Storybook, for example the{" "}
-        <code>&lt;Source /&gt;</code> component below. Or build a completely
-        custom UI.
-      </p>
-      <Source code={code} language="jsx" format={false} />
+      <Title>Related Links</Title>
+      <div>
+        {sections.map((section) => (
+          <Section key={section.title}>
+            <h3>{section.title}</h3>
+            <List>
+              {section.links.map((link) => (
+                <ListItem key={link.url}>
+                  <Link href={link.url} target="_blank">
+                    {link.text}
+                  </Link>
+                  <div>{link.description}</div>
+                </ListItem>
+              ))}
+            </List>
+          </Section>
+        ))}
+      </div>
     </TabInner>
   </TabWrapper>
 );
