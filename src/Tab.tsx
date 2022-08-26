@@ -9,10 +9,9 @@ interface TabProps {
 
 export const Tab: React.FC<TabProps> = ({ active }) => {
   // https://storybook.js.org/docs/react/addons/addons-api#useparameter
-  const { code, sections } = useParameter<TabContentProps>(PARAM_KEY, {
-    code: "",
+  const { sections } = useParameter<TabContentProps>(PARAM_KEY, {
     sections: [],
   });
 
-  return active ? <TabContent code={code} sections={sections} /> : null;
+  return active ? <TabContent sections={sections} /> : null;
 };

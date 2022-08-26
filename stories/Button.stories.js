@@ -13,7 +13,6 @@ export default {
             {
               text: "Angular Material",
               url: "https://material.angular.io",
-              description: "Imported from Angular Material",
             },
             {
               text: "Angular Material",

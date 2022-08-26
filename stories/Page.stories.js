@@ -11,6 +11,7 @@ export default {
       sections: [
         {
           title: "Sources",
+          description: 'These are picked with love',
           links: [
             {
               text: "Angular Material",

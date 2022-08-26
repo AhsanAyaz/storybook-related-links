@@ -48,15 +48,15 @@ interface IRLink {
 
 interface IRLSection {
   title?: string;
+  description?: string;
   links: IRLink[];
 }
 
 export interface TabContentProps {
-  code: string;
   sections: IRLSection[];
 }
 
-export const TabContent: React.FC<TabContentProps> = ({ code, sections }) => {
+export const TabContent: React.FC<TabContentProps> = ({ sections }) => {
   return (
     <TabWrapper>
       <TabInner>
@@ -83,13 +83,22 @@ export const TabContent: React.FC<TabContentProps> = ({ code, sections }) => {
               {sections.map((section) => (
                 <Section key={section.title}>
                   <h3>{section.title}</h3>
+                  {section.description && <p>{section.description}</p>}
                   <List>
                     {section.links.map((link) => (
                       <ListItem key={link.url}>
-                        <Link href={link.url} target="_blank">
+                        {
+                          !link.description ? <Link style={{paddingLeft: '14px'}} href={link.url} target="_blank">
                           {link.text}
-                        </Link>
-                        <div>{link.description}</div>
+                        </Link> : <details>
+                          <summary>
+                          <Link href={link.url} target="_blank">
+                            {link.text}
+                          </Link>
+                          </summary>
+                          <p>{link.description}</p>
+                        </details>
+                        }
                       </ListItem>
                     ))}
                   </List>
