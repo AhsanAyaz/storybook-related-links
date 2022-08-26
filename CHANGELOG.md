@@ -1,3 +1,15 @@
+# v0.0.3 (Fri Aug 26 2022)
+
+#### ⚠️ Pushed to `main`
+
+- fix(globalDecorators): remove global decorators (=)
+
+#### Authors: 1
+
+- Muhammad Ahsan Ayaz (=)
+
+---
+
 # v0.0.2 (Thu Aug 25 2022)
 
 #### 🐛 Bug Fix
