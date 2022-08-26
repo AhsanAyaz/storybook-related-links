@@ -1,3 +1,15 @@
+# v0.0.4 (Fri Aug 26 2022)
+
+#### ⚠️ Pushed to `main`
+
+- feat(link-section): add description to section props (=)
+
+#### Authors: 1
+
+- Muhammad Ahsan Ayaz (=)
+
+---
+
 # v0.0.3 (Fri Aug 26 2022)
 
 #### ⚠️ Pushed to `main`
