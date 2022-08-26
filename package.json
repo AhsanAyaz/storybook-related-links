@@ -1,6 +1,6 @@
 {
   "name": "storybook-addon-related-links",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Add links to your stories within sections",
   "keywords": [
     "storybook-addons",
