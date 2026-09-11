@@ -9,24 +9,17 @@ export default {
       sections: [
         {
           title: "Sources",
-          description: 'These are picked with love',
+          description: "Where this page's patterns come from",
           links: [
             {
-              text: "Angular Material",
-              url: "https://material.angular.io",
-              description: "Imported from Angular Material",
+              text: "Component-driven development",
+              url: "https://www.componentdriven.org",
+              description:
+                "The methodology this example page is built around: start with atomic components, end with pages.",
             },
             {
-              text: "Angular Material",
-              url: "https://material.angular.io",
-            },
-            {
-              text: "Angular Material",
-              url: "https://material.angular.io",
-            },
-            {
-              text: "Angular Material",
-              url: "https://material.angular.io",
+              text: "Storybook docs: writing stories",
+              url: "https://storybook.js.org/docs/writing-stories",
             },
           ],
         },
@@ -36,19 +29,11 @@ export default {
             {
               text: "Angular Material",
               url: "https://material.angular.io",
-              description: "Imported from Angular Material",
+              description: "Angular's port of Google's Material Design.",
             },
             {
-              text: "Angular Material",
-              url: "https://material.angular.io",
-            },
-            {
-              text: "Angular Material",
-              url: "https://material.angular.io",
-            },
-            {
-              text: "Angular Material",
-              url: "https://material.angular.io",
+              text: "Chromatic",
+              url: "https://www.chromatic.com",
             },
           ],
         },

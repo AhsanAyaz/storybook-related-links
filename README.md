@@ -1,118 +1,154 @@
 # Storybook Addon Related Links
-Add related links to your stories. Useful for adding external links to the stories to highlight resources to study, inspirations, sources etc.
 
+Add related links to your stories. Useful for pointing at the resources behind a component: design sources, inspirations, docs to study, tickets, anything worth one click.
+
+Links show up in a **Related Links** panel next to Controls and Actions, per story.
+
+![Demo](./assets/demo.png)
+
+## Compatibility
+
+| Addon  | Storybook  |
+| ------ | ---------- |
+| 1.x    | 10.x       |
+| 0.0.x  | 6.5.x      |
+
+Storybook 10 is ESM-only, so this addon ships ESM-only from 1.0.0. If you are still on Storybook 6.5, stay on `0.0.4`.
+
+## Install
+
+```bash
+npm install --save-dev storybook-addon-related-links
+```
+
+Register it in `.storybook/main.ts`:
+
+```ts
+import type { StorybookConfig } from "@storybook/react-vite";
+
+const config: StorybookConfig = {
+  stories: ["../src/**/*.stories.@(js|jsx|ts|tsx)"],
+  addons: ["storybook-addon-related-links"],
+  framework: { name: "@storybook/react-vite", options: {} },
+};
+
+export default config;
+```
+
+The addon reads parameters only, so it works with any renderer — React, Angular, Vue, Svelte, Web Components, HTML.
 
 ## Usage
-You can add related links by adding the parameters to your stories as follows:
-```javascript
-MyStory.parameters = {
-  relatedLinks: {
-    sections: [
-      {
-        title: "Links to study",
-        links: [
-          {
-            text: "Angular Material",
-            url: "https://material.angular.io",
-            description: "This component is highly inspired from Angular Material. Which is an Angular port of the Material design by Google",
-          },
-        ],
-      },
-    ],
+
+Add a `relatedLinks` parameter to a story, a component, or your whole preview:
+
+```js
+export const Primary = {
+  parameters: {
+    relatedLinks: {
+      sections: [
+        {
+          title: "Links to study",
+          description: "Read these before changing the component",
+          links: [
+            {
+              text: "Angular Material",
+              url: "https://material.angular.io",
+              description:
+                "This component is heavily inspired by Angular Material, Google's Material Design port for Angular.",
+            },
+            {
+              text: "Storybook docs: args",
+              url: "https://storybook.js.org/docs/writing-stories/args",
+            },
+          ],
+        },
+      ],
+    },
   },
-}
+};
 ```
 
-## Demo
-![Demo](./assets//demo.png)
+Links with a `description` render as a collapsible row; links without one render as a plain link.
 
-### Development scripts
+Put the parameter on the default export to cover every story of a component, or in `.storybook/preview.ts` to cover every story in the project. Storybook merges parameters most-specific-first, and arrays are replaced rather than concatenated, so a story-level `sections` array wins over a component-level one.
 
-- `yarn start` runs babel in watch mode and starts Storybook
-- `yarn build` build and package your addon code
+### Parameters
 
-### Switch from TypeScript to JavaScript
+`relatedLinks`
 
-Don't want to use TypeScript? We offer a handy eject command: `yarn eject-ts`
+| Property   | Type              | Required | Description                    |
+| ---------- | ----------------- | -------- | ------------------------------ |
+| `sections` | `Section[]`       | yes      | Groups of links, rendered in order |
 
-This will convert all code to JS. It is a destructive process, so we recommended running this before you start writing any code.
+`Section`
 
-## What's included?
+| Property      | Type      | Required | Description                                   |
+| ------------- | --------- | -------- | --------------------------------------------- |
+| `title`       | `string`  | no       | Heading for the group                         |
+| `description` | `string`  | no       | Short line under the heading                  |
+| `links`       | `Link[]`  | yes      | The links in this group                       |
 
-The addon code lives in `src`. It demonstrates all core addon related concepts. The three [UI paradigms](https://storybook.js.org/docs/react/addons/addon-types#ui-based-addons)
+`Link`
 
-- `src/Tool.js`
-- `src/Panel.js`
-- `src/Tab.js`
+| Property      | Type      | Required | Description                                         |
+| ------------- | --------- | -------- | --------------------------------------------------- |
+| `text`        | `string`  | yes      | Link label                                          |
+| `url`         | `string`  | yes      | Destination, opened in a new tab                    |
+| `description` | `string`  | no       | Longer explanation; makes the row collapsible       |
 
-Which, along with the addon itself, are registered in `src/preset/manager.js`.
+TypeScript users can import the types:
 
-Managing State and interacting with a story:
+```ts
+import type {
+  RelatedLink,
+  RelatedLinksSection,
+  RelatedLinksParameters,
+} from "storybook-addon-related-links";
+```
 
-- `src/withGlobals.js` & `src/Tool.js` demonstrates how to use `useGlobals` to manage global state and modify the contents of a Story.
-- `src/withRoundTrip.js` & `src/Panel.js` demonstrates two-way communication using channels.
-- `src/Tab.js` demonstrates how to use `useParameter` to access the current story's parameters.
+### CSF Factories
 
-Your addon might use one or more of these patterns. Feel free to delete unused code. Update `src/preset/manager.js` and `src/preset/preview.js` accordingly.
+On CSF Factories (CSF Next), add the addon to your preview to get a typed `relatedLinks` parameter:
 
-Lastly, configure you addon name in `src/constants.js`.
+```ts
+// .storybook/preview.ts
+import { definePreview } from "@storybook/react-vite";
+import relatedLinks from "storybook-addon-related-links/preview";
 
-### Metadata
+export default definePreview({
+  addons: [relatedLinks()],
+});
+```
 
-Storybook addons are listed in the [catalog](https://storybook.js.org/addons) and distributed via npm. The catalog is populated by querying npm's registry for Storybook-specific metadata in `package.json`. This project has been configured with sample data. Learn more about available options in the [Addon metadata docs](https://storybook.js.org/docs/react/addons/addon-catalog#addon-metadata).
+## Upgrading from 0.0.x
 
-## Release Management
+Storybook 11 removes the `TAB` addon type, so the links moved out of their own tab and into the addon panel. The `relatedLinks` parameter is unchanged — no story edits needed. What changed:
 
-### Setup
+- peer dependency is now `storybook@^10`, replacing the `@storybook/*` peers
+- the `/related-links/:storyId` route is gone; open the **Related Links** panel instead
+- the package is ESM-only
 
-This project is configured to use [auto](https://github.com/intuit/auto) for release management. It generates a changelog and pushes it to both GitHub and npm. Therefore, you need to configure access to both:
-
-- [`NPM_TOKEN`](https://docs.npmjs.com/creating-and-viewing-access-tokens#creating-access-tokens) Create a token with both _Read and Publish_ permissions.
-- [`GH_TOKEN`](https://github.com/settings/tokens) Create a token with the `repo` scope.
-
-Then open your `package.json` and edit the following fields:
-
-- `name`
-- `author`
-- `repository`
-
-#### Local
-
-To use `auto` locally create a `.env` file at the root of your project and add your tokens to it:
+## Development
 
 ```bash
-GH_TOKEN=<value you just got from GitHub>
-NPM_TOKEN=<value you just got from npm>
+npm install
+npm start          # builds in watch mode and runs the local Storybook
+npm run check      # type check
+npm run build      # build the addon
 ```
 
-Lastly, **create labels on GitHub**. You’ll use these labels in the future when making changes to the package.
+The example stories in `stories/` double as the manual test bed: `Example/Page` shows multiple sections, `Example/Button → Small` shows a collapsible description, and `Example/Header` shows the empty state.
+
+## Releasing
+
+Releases are cut by hand from a clean `main`:
 
 ```bash
-npx auto create-labels
+npm version <major|minor|patch>
+npm publish
+git push --follow-tags
+gh release create "v$(node -p "require('./package.json').version")" --generate-notes
 ```
-
-If you check on GitHub, you’ll now see a set of labels that `auto` would like you to use. Use these to tag future pull requests.
-
-#### GitHub Actions
-
-This template comes with GitHub actions already set up to publish your addon anytime someone pushes to your repository.
-
-Go to `Settings > Secrets`, click `New repository secret`, and add your `NPM_TOKEN`.
-
-### Creating a release
-
-To create a release locally you can run the following command, otherwise the GitHub action will make the release for you.
-
-```sh
-yarn release
-```
-
-That will:
-
-- Build and package the addon code
-- Bump the version
-- Push a release to GitHub and npm
-- Push a changelog to GitHub
 
 ## Connect with me
 
