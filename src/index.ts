@@ -1,6 +1,7 @@
-if (module && module.hot && module.hot.decline) {
-  module.hot.decline();
-}
-
-// make it work with --isolatedModules
-export default {};
+export { ADDON_ID, PANEL_ID, PARAM_KEY } from "./constants";
+export type {
+  RelatedLink,
+  RelatedLinksSection,
+  RelatedLinksParameters,
+  RelatedLinksTypes,
+} from "./types";
