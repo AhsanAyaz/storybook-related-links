@@ -1,21 +1,19 @@
 {
   "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
-    "baseUrl": ".",
-    "emitDecoratorMetadata": true,
-    "esModuleInterop": true,
-    "experimentalDecorators": true,
-    "incremental": false,
-    "isolatedModules": true,
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
     "jsx": "react",
-    "lib": ["es2017", "dom"],
-    "module": "commonjs",
+    "strict": false,
     "noImplicitAny": true,
-    "rootDir": "./src",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "isolatedModules": true,
     "skipLibCheck": true,
-    "target": "es5"
+    "resolveJsonModule": true,
+    "noEmit": true,
+    "types": ["node"]
   },
-  "include": [
-    "src/**/*"
-  ],
+  "include": ["src/**/*", "tsup.config.ts"]
 }
